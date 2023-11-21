@@ -141,4 +141,35 @@ class Platform implements IPlatform
 				throw new GeneralException("Unable to convert '$region' platform ID to corresponding continent region.");
 		}
 	}
+
+    public function getCorrespondingContinentRegionNew($region): string
+    {
+        switch ($this->getPlatformNameOfRegion($region))
+        {
+            case Platform::EUROPE_WEST:
+            case Platform::EUROPE_EAST:
+            case Platform::TURKEY:
+            case Platform::RUSSIA:
+                return IRegion::EUROPE;
+
+            case Platform::NORTH_AMERICA:
+            case Platform::LAMERICA_NORTH:
+            case Platform::LAMERICA_SOUTH:
+            case Platform::BRASIL:
+            case Platform::OCEANIA:
+                return IRegion::AMERICAS;
+
+            case Platform::KOREA:
+            case Platform::JAPAN:
+            case Platform::TAIWAN:
+            case Platform::PHILIPPINES:
+            case Platform::VIETNAM:
+            case Platform::SINGAPORE:
+            case Platform::THAILAND:
+                return IRegion::ASIA;
+
+            default:
+                throw new GeneralException("Unable to convert '$region' platform ID to corresponding continent region.");
+        }
+    }
 }
